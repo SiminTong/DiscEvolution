@@ -1,3 +1,8 @@
+############ Log ###########
+# 15May2024
+# change default mu= 2.4-> 2.3 to match DustPy
+############################
+
 from __future__ import print_function
 import numpy as np
 from .brent import brentq
@@ -14,7 +19,7 @@ class EOS_Table(object):
     """
     def __init__(self):
         self._gamma = 1.0
-        self._mu    = 2.4
+        self._mu    = 2.3
     
     def set_grid(self, grid):
         self._R      = grid.Rc
@@ -91,9 +96,9 @@ class LocallyIsothermalEOS(EOS_Table):
         q       : power-law index of sound-speed
         alpha_t : turbulent alpha parameter
         star    : stellar properties
-        mu      : mean molecular weight, default=2.4
+        mu      : mean molecular weight, default=2.
     """
-    def __init__(self, star, h0, q, alpha_t, alpha_dw, leverarm, mu=2.4):
+    def __init__(self, star, h0, q, alpha_t, alpha_dw, leverarm, mu=2.3):
         super(LocallyIsothermalEOS, self).__init__()
         
         self._h0 = h0

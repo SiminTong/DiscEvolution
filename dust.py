@@ -5,6 +5,12 @@
 #
 # Classes extending accretion disc objects to include dust models.
 ################################################################################
+############ Log ###########
+# 15May2024
+# change default rhos= 1-> 1.67 to match the default parameter in DustPy
+# change default a0 = 1e-4 (1 micron) to match DustPy 
+############################
+
 from __future__ import print_function
 import numpy as np
 from .constants import *
@@ -25,7 +31,7 @@ class DustyDisc(AccretionDisc):
         feedback : When False, the dust mass is considered to be a negligible
                    fraction of the total mass.
     """
-    def __init__(self, grid, star, eos, Sigma=None, rho_s=1., Sc=1.,
+    def __init__(self, grid, star, eos, Sigma=None, rho_s=1.67, Sc=1.,
                  feedback=True):
 
         super(DustyDisc, self).__init__(grid, star, eos, Sigma)
@@ -177,9 +183,9 @@ class FixedSizeDust(DustyDisc):
         Schmidt  : Schmidt number, default=1
         feedback : default=True
     """
-    def __init__(self, grid, star, eos, eps, size, Sigma=None, rhos=1,
+    def __init__(self, grid, star, eos, eps, size, Sigma=None, rhos=1.67,
                  Schmidt=1.0, feedback=True):
-
+    
         super(FixedSizeDust, self).__init__(
             grid, star, eos, Sigma, rhos, Schmidt, feedback)
 
@@ -228,8 +234,8 @@ class DustGrowthTwoPop(DustyDisc):
                     The slope d ln n(a) / d ln a of the number distribution with size (3.5 for MRN)
     """
     def __init__(self, grid, star, eos, eps, Sigma=None,
-                 rho_s=1., Sc=1., uf_0=100., uf_ice=1e3, f_ice=1, thresh=0.1,
-                 f_grow=1.0, a0=1e-5, amin=1e-5, f_drift=0.55, f_frag=0.37, feedback=True, start_small=True, distribution_slope=3.5):
+                 rho_s=1.67, Sc=1., uf_0=100., uf_ice=1e3, f_ice=1, thresh=0.1,
+                 f_grow=1.0, a0=1e-4, amin=1e-5, f_drift=0.55, f_frag=0.37, feedback=True, start_small=True, distribution_slope=3.5):
         super(DustGrowthTwoPop, self).__init__(grid, star, eos, Sigma, rho_s, Sc, feedback)
         
         self._uf_0   = uf_0 / (AU * Omega0)
